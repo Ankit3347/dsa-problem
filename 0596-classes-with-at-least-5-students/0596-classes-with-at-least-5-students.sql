@@ -1,4 +1,12 @@
 /* Write your T-SQL query statement below */
-select class from courses 
-group by class
-having count(*)>=5;
+with ClassName as(
+    select 
+    class,
+    count(student) as TotalStudent
+    from courses
+    group by class
+)
+
+select class
+from ClassName
+where TotalStudent>=5
